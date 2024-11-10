@@ -9,6 +9,13 @@ An improved and more fun version of the classic but lame Tic-Tac-Toe game
 
 ## Installation
 
+To set up Super Tic-Tac-Toe on your local machine
+
+ **Clone the repository** to your local machine:
+   ```bash
+   git clone https://github.com/yourusername/super_tictactoe.git
+
+
 ## License
 
 MIT License
