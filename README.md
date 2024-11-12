@@ -37,7 +37,7 @@ cd super_tictactoe
 **Run main.py and enjoy the game!**
 
 ```bash
-cd super_tictactoe
+python main.py
 ```
 
 ## License
