@@ -28,6 +28,18 @@ To set up Super Tic-Tac-Toe on your local machine
 git clone https://github.com/yourusername/super_tictactoe.git
 ```
 
+**Navigate to the project directory**:
+
+```bash
+cd super_tictactoe
+```
+
+**Run main.py and enjoy the game!**
+
+```bash
+cd super_tictactoe
+```
+
 ## License
 
 MIT License
