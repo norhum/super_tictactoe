@@ -5,6 +5,8 @@ Inspired by a YouTube shorts from Vsauce
 
 An improved and more fun version of the classic but lame Tic-Tac-Toe game
 
+![Ultimate Tic-Tac-Toe Example](https://upload.wikimedia.org/wikipedia/commons/a/af/Super_tic-tac-toe_rules_example.png)
+
 ## Rules
 
 Super Tic-Tac-Toe is played on a 3x3 grid of smaller 3x3 boards. The goal is to win three small boards in a sequence on the super board.
@@ -19,6 +21,12 @@ Super Tic-Tac-Toe is played on a 3x3 grid of smaller 3x3 boards. The goal is to 
 4. **Draw**: If all boards fill without a winner, the game is a draw.
 
 ## Installation
+
+First **pip install numpy** if you haven't already
+
+```bash
+pip install numpy
+```
 
 To set up Super Tic-Tac-Toe on your local machine
 
