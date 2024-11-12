@@ -1,2 +1,3 @@
 implement monte carlo tree search for ai
-gui for extra fun!
+
+also implement gui for extra fun!

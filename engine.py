@@ -63,7 +63,7 @@ class SuperTicTacToe():
     def __init__(self):
         self.board = [TicTacToe() for _ in range(9)]
         self.meta_board = np.full(9, " ")
-        self.next_board = "any"
+        self.next_board = -1
 
     def display(self):
         arrays = []
@@ -106,7 +106,7 @@ class SuperTicTacToe():
                     continue
 
                 # Validate next board
-                if self.next_board != "any" and self.next_board != row:
+                if self.next_board != -1 and self.next_board != row:
                     print(f"Play in board {self.next_board}")
                     continue
                 
@@ -134,11 +134,11 @@ class SuperTicTacToe():
             if mini_board.check_win():
                 self.meta_board[a] = player
                 mini_board.board = np.full(9, player)
-                self.next_board = "any"
+                self.next_board = -1
             elif mini_board.check_draw():
                 self.meta_board[a] = "D"
                 mini_board.board = np.full(9, "D")
-                self.next_board = "any"
+                self.next_board = -1
 
             if self.check_win():
                 self.display() 
@@ -148,10 +148,7 @@ class SuperTicTacToe():
                 self.display() 
                 print("Draw") 
 
-            if player == "O":
-                player = "X"
-            else:
-                player = "O"
+            player = "O" if player == "X" else "X"
             
             self.display() 
             

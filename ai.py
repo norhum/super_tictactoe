@@ -5,7 +5,7 @@ from copy import deepcopy
 from engine import SuperTicTacToe
 
 class MonteCarloAI(SuperTicTacToe):
-    def __init__(self, iter=500):    
+    def __init__(self, iter=10):    
         """
         Play with a Monte Carlo AI player for the Super TicTacToe game.
         
@@ -23,19 +23,23 @@ class MonteCarloAI(SuperTicTacToe):
         """
         available_moves = [(i,j) for i in range(9) for j in range(9) if self.board[i].board[j] == " "]
 
-        # store wins for each possible move
+        # store wins and total simulations for each possible move
         wins = {move: 0 for move in available_moves}
         sims = {move: 0 for move in available_moves}
 
         for move in available_moves:
             for _ in range(self.iter):
                 board_copy = deepcopy(self.board)
+                meta_board_copy = deepcopy(self.meta_board)
+                next_board_copy = deepcopy(self.next_board)
 
                 board_copy[move[0]].board[move[1]] = player
 
-                temp_game = SuperTicTacToe()
+                temp_game = MonteCarloAI()
                 temp_game.board = board_copy
-                result = temp_game._simulate_game()
+                temp_game.meta_board = meta_board_copy
+                temp_game.next_board = next_board_copy
+                result = temp_game._simulate_game(player)
 
                 if result == player:
                     wins[move] += 1
@@ -45,13 +49,56 @@ class MonteCarloAI(SuperTicTacToe):
 
         return max(move_win_rates, key=move_win_rates.get)
 
-    def _simulate_game(self):
+    def _simulate_game(self, player):
         """
         Simulates a random game from the current position until completion
         Returns the winner ('X', 'O', or 'Draw')
         """
-        pass
+        while True:
+            if self.check_win():
+                return player
+            if self.check_draw():
+                return "Draw"
+            
+            # Get valid moves for current board state
+            valid_moves = []
+            if self.next_board == -1:  # Can play anywhere
+                for i in range(9):
+                    if self.meta_board[i] == ' ':  # If sub-board isn't won
+                        for j in range(9):
+                            if self.board[i].board[j] == ' ':
+                                valid_moves.append((i, j))
+            
+            else:  # Must play in specific sub-board
+                if self.meta_board[self.next_board] == ' ':  # If sub-board isn't won
+                    for j in range(9):
+                        if self.board[self.next_board].board[j] == ' ':
+                            valid_moves.append((self.next_board, j))
+                else:  # If forced board is full/won, can play anywhere
+                    for i in range(9):
+                        if self.meta_board[i] == ' ':
+                            for j in range(9):
+                                if self.board[i].board[j] == ' ':
+                                    valid_moves.append((i, j))
 
+            if not valid_moves:
+                return "Draw"
+            
+            # Make random move
+            player = "O" if player == "X" else "X"
+            move = random.choice(valid_moves)
+            self.board[move[0]].board[move[1]] = player
+
+            # Update meta board if sub-board was won
+            sub_board_winner = self.board[move[0]].check_win()
+            if sub_board_winner:
+                self.meta_board[move[0]] = player
+            elif self.board[move[0]].check_draw():
+                self.meta_board[move[0]] = 'D'
+                
+            # Update next board
+            self.next_board = move[1] if self.meta_board[move[1]] == ' ' else -1
+            
     def play(self):
         self.display() 
         player = "O"
