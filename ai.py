@@ -112,14 +112,16 @@ class MonteCarloAI(SuperTicTacToe):
             mini_board = self.board[a]
             mini_board.play(player, b)
 
+            self.next_board = b
+
             if mini_board.check_win():
                 self.meta_board[a] = player
                 mini_board.board = np.full(9, player)
-                self.next_board = "any"
+                self.next_board = -1
             elif mini_board.check_draw():
                 self.meta_board[a] = "D"
                 mini_board.board = np.full(9, "D")
-                self.next_board = "any"
+                self.next_board = -1
 
             if self.check_win():
                 self.display() 
@@ -129,10 +131,6 @@ class MonteCarloAI(SuperTicTacToe):
                 self.display() 
                 print("Draw") 
 
-            if player == "O":
-                player = "X"
-            else:
-                player = "O"
+            player = "O" if player == "X" else "X"
             
             self.display() 
-        

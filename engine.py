@@ -114,8 +114,6 @@ class SuperTicTacToe():
                 if self.board[row][col] != " ":
                     print(f"Position {row+1},{col+1} is already occupied")
                     continue
-
-                self.next_board = col
                     
                 return row, col
                 

@@ -42,7 +42,7 @@ git clone https://github.com/yourusername/super_tictactoe.git
 cd super_tictactoe
 ```
 
-**Run main.py and enjoy the game!**
+**Run main.py** and enjoy the game!
 
 ```bash
 python main.py
