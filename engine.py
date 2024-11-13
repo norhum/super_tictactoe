@@ -16,6 +16,8 @@ def display_board(current):
             print(f'{current[3*i+1][3*j]}|{current[3*i+1][3*j+1]}|{current[3*i+1][3*j+2]}', end="  ")
             print(f'{current[3*i+2][3*j]}|{current[3*i+2][3*j+1]}|{current[3*i+2][3*j+2]}')
         print("")
+    print("-"*18)
+    print("")
 
 class TicTacToe:
     def __init__(self):
@@ -102,12 +104,12 @@ class SuperTicTacToe():
                 
                 # Validate input range
                 if not (0 <= row <= 8 and 0 <= col <= 8):
-                    print("Position must be between 0 and 8")
+                    print("Position must be between 1 and 9")
                     continue
 
                 # Validate next board
-                if self.next_board != -1 and self.next_board != row:
-                    print(f"Play in board {self.next_board}")
+                if self.next_board != -1 and self.next_board != row: #and self.meta_board[row] != " "
+                    print(f"Play in board {self.next_board + 1}")
                     continue
                 
                 # Validate empty position
@@ -137,14 +139,18 @@ class SuperTicTacToe():
                 self.meta_board[a] = "D"
                 mini_board.board = np.full(9, "D")
                 self.next_board = -1
+            else:
+                self.next_board = b if self.meta_board[b] == ' ' else -1
 
             if self.check_win():
                 self.display() 
                 print(f"player '{player}' won the game!") 
+                break
             
             if self.check_draw():
                 self.display() 
                 print("Draw") 
+                break
 
             player = "O" if player == "X" else "X"
             

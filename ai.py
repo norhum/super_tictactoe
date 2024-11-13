@@ -21,8 +21,11 @@ class MonteCarloAI(SuperTicTacToe):
         Returns the best move based on Monte Carlo simulation results
         Returns: tuple (row, col) representing the best move
         """
-        available_moves = [(i,j) for i in range(9) for j in range(9) if self.board[i].board[j] == " "]
-
+        available_moves = [(self.next_board,i) for i in range(9) if self.next_board != -1 and self.board[self.next_board].board[i] == " "]
+        if self.next_board == -1:
+            print('here')
+            available_moves = [(i,j) for i in range(9) for j in range(9) if self.meta_board[i] == " " and self.board[i].board[j] == " "]
+        print(available_moves)
         # store wins and total simulations for each possible move
         wins = {move: 0 for move in available_moves}
         sims = {move: 0 for move in available_moves}
@@ -46,6 +49,7 @@ class MonteCarloAI(SuperTicTacToe):
                 sims[move] += 1
 
         move_win_rates = {move: wins[move]/sims[move] for move in available_moves}
+        print(move_win_rates)
 
         return max(move_win_rates, key=move_win_rates.get)
 
@@ -104,6 +108,10 @@ class MonteCarloAI(SuperTicTacToe):
         player = "O"
         
         while True:
+            if self.next_board == -1:
+                print(f'you can place anywhere')
+            else:
+                print(f'place in board {self.next_board + 1}')
             if player == "O":
                 a, b = self.get_valid_move(player) 
             else:
@@ -111,8 +119,6 @@ class MonteCarloAI(SuperTicTacToe):
             
             mini_board = self.board[a]
             mini_board.play(player, b)
-
-            self.next_board = b
 
             if mini_board.check_win():
                 self.meta_board[a] = player
@@ -122,14 +128,18 @@ class MonteCarloAI(SuperTicTacToe):
                 self.meta_board[a] = "D"
                 mini_board.board = np.full(9, "D")
                 self.next_board = -1
+            else:
+                self.next_board = b if self.meta_board[b] == ' ' else -1
 
             if self.check_win():
                 self.display() 
                 print(f"player '{player}' won the game!") 
+                break
             
             if self.check_draw():
                 self.display() 
                 print("Draw") 
+                break
 
             player = "O" if player == "X" else "X"
             
