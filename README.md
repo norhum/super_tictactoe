@@ -5,7 +5,7 @@ Inspired by a YouTube shorts from Vsauce
 
 An improved and more fun version of the classic but lame Tic-Tac-Toe game
 
-![Ultimate Tic-Tac-Toe Example](https://upload.wikimedia.org/wikipedia/commons/7/7d/Super_tic-tac-toe_rules_example.png)
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Super_tic-tac-toe_rules_example.png" width="500"/>
 
 ## Rules
 
