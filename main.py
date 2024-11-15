@@ -3,6 +3,7 @@ from ai import MonteCarloAI
 
 def main():
     ask = input("Play with Monte Carlo AI? (y/n): ")
+    
     if ask == 'y' or ask == 'Y':
         strength = input("Enter AI strength (easy, medium, hard): ")
         if strength == 'easy':
@@ -11,6 +12,7 @@ def main():
             iter = 100
         else:
             iter = 500
+
         game = MonteCarloAI(iter)
         game.play()
     else:
@@ -19,5 +21,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
-    

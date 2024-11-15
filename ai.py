@@ -107,7 +107,6 @@ class MonteCarloAI(SuperTicTacToe):
         player = "O"
         
         while True:
-
             if player == "O":
                 if self.next_board == -1:
                     print(f'you can place anywhere')
