@@ -4,7 +4,14 @@ from ai import MonteCarloAI
 def main():
     ask = input("Play with Monte Carlo AI? (y/n): ")
     if ask == 'y' or ask == 'Y':
-        game = MonteCarloAI()
+        strength = input("Enter AI strength (easy, medium, hard): ")
+        if strength == 'easy':
+            iter = 10
+        elif strength == 'medium':
+            iter = 100
+        else:
+            iter = 500
+        game = MonteCarloAI(iter)
         game.play()
     else:
         game = SuperTicTacToe()

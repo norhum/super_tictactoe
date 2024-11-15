@@ -134,13 +134,11 @@ class SuperTicTacToe():
             if mini_board.check_win():
                 self.meta_board[a] = player
                 mini_board.board = np.full(9, player)
-                self.next_board = -1
             elif mini_board.check_draw():
                 self.meta_board[a] = "D"
                 mini_board.board = np.full(9, "D")
-                self.next_board = -1
-            else:
-                self.next_board = b if self.meta_board[b] == ' ' else -1
+                
+            self.next_board = b if self.meta_board[b] == ' ' else -1
 
             if self.check_win():
                 self.display() 
