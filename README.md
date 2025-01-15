@@ -5,8 +5,6 @@ Inspired by a YouTube shorts from Vsauce
 
 An improved and more fun version of the classic but lame Tic-Tac-Toe game
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Super_tic-tac-toe_rules_example.png" width="500"/>
-
 ## Rules
 
 Super Tic-Tac-Toe is played on a 3x3 grid of smaller 3x3 boards. The goal is to win three small boards in a sequence on the super board.
